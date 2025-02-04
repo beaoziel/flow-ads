@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+<div class="container" id="container">
+	<div class="form-container sign-up-container">
+		<form action="#">
+			<h1 style="margin-bottom: 12%; color: rgb(107, 107, 107);">Crie sua conta</h1>
+		<!--<div class="social-container">
+                <a href="#" class="social"><img src="./img/icongoogle.png" alt=""></a>
+                <a href="#" class="social"><img src="./img/linkedin.png" alt=""></a>
+			</div>-->	
+			<span style="font-weight: 500; font-size: 16px;">Use um email para realizar o cadastro</span>
+            <div class="label-float">
+                <input type="text" placeholder=" " class="email">
+                <label for="">Email</label>
+            </div>
+            <div class="label-float">
+                <input type="password" placeholder=" " class="senha">
+                <label for="">Senha</label>
+            </div>
+            <div class="label-float">
+                <input type="password" placeholder=" " class="senha">
+                <label for="">Confirmar senha</label>
+            </div>
+            <div class="label-float">
+                <input type="text" placeholder=" " class="email">
+                <label for="">Token</label>
+            </div>
+			<button style="margin-top: 10px;" class="entrar">Cadastrar</button>
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		<form action="#">
+			<h1 style="margin-bottom: 12%;"><img src="./img/ideia01.png" alt="" onclick="flow()"></h1>
+		<!--<div class="social-container">
+                <a href="#" class="social"><img src="./img/icongoogle.png" alt=""></a>
+                <a href="#" class="social"><img src="./img/linkedin.png" alt=""></a>
+            </div>-->	
+            <div style="width: 100%;"><span style="font-weight: 500; font-size: 18px;">Entre em sua conta</span></div>
+            <div class="label-float">
+                <input type="text" placeholder=" " class="email">
+                <label for=""> Email</label>
+            </div>
+            <div class="label-float">
+                <input type="password" placeholder=" " class="senha">
+                <label for="">Senha</label>
+            </div>
+			<div style="width: 100%;"><a href="#" style=" float: left;">Esqueceu sua senha?</a></div> 
+			<button class="entrar" style="float: left;">Entrar</button>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Bem vindo!</h1>
+				<p>Caso ja possua um cadastro, entre em sua conta!</p>
+				<button class="ghost" id="signIn">Entrar</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Olá, usuário!</h1>
+				<p>Caso ainda não possua cadastro, crie sua conta!</p>
+				<button class="ghost" id="signUp">Cadastre-se</button>
+			</div>
+		</div>
+	</div>
+</div>
+    
+</body>
+</html>
+
+<script>
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const container = document.getElementById('container');
+
+    signUpButton.addEventListener('click', () => {
+        container.classList.add("right-panel-active");
+    });
+
+    signInButton.addEventListener('click', () => {
+        container.classList.remove("right-panel-active");
+    });
+
+    function flow(){
+        window.location.href = "../index.html";
+    }
+
+</script>

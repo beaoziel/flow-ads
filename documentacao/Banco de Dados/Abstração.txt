@@ -1,0 +1,94 @@
+Tabelas
+
+Filial(
+cod_filial;
+descricao;
+cnpj;
+cep;
+logradouro;
+bairro;
+num_estabelecimento;
+cidade;
+uf;
+qtd_sensores; -- Quantidade de sensores instalados no estabelecimento
+num_telefone;
+num_telefone_dois;
+num_celular;
+cod_acesso; -- Código de acesso gerado pelo sistema
+cod_representante; -- Código do representante desta filial
+data_cadastro;
+);
+
+teste
+
+
+Representante(
+cod_representante;
+nome;
+cpf;
+data_nasc;
+num_celular;
+num_celular_dois;
+data_cadastro;
+); tabela com os dados dos representantes das filiais
+
+Usuario(
+cod_usuario;
+email_usuario;
+senha_usuario;
+email_recuperacao;
+cod_tipo_usuario; -- Código do tipo de acesso deste usuário(Adm ou Cliente)
+data_cadastro;
+);
+
+Tipo_Usuario(
+cod_tipo_usuario;
+descricao; -- Adm ou Cliente
+data_cadastro;
+);
+
+
+Historico_sensor(
+cod_historico;
+info_sensor; -- A informção que o sensor está passando (0 ou 1 = não passou ou passou algúem)
+cod_sensor_filial;
+data_hora_info; -- Data e hora atual do cadastro da informação (Dia 20/03/2020 às 14:20:09 'passou alguém', Dia 20/03/2020 às 14:25:34 'passou alguém')
+);tabela que recebe os dados de todas as 'movimentações' dos sensores. Obs: Relacionada a tabela 'Sensor_Filial'.
+
+
+Historico_sensor(
+cod_historico;
+info_sensor; -- A informação que o sensor está passando (0 ou 1 = não passou ou passou alguém)
+cod_filial;
+data_hora_info; -- Data e hora atual do cadastro da informação (Dia 20/03/2020 às 14:20:09 'passou alguém', Dia 20/03/2020 às 14:25:34 'passou alguém')
+);tabela que recebe os dados de todas as 'movimentações' dos sensores. Obs: Relacionada a tabela 'Sensor_Filial'.
+
+Como na faculade só teremos acesso a um sensor disponibilizado pela faculdade
+a tabela acima representa uma relação de um sensor para uma filial.
+
+
+--------------------------------------------------------------------------------------------
+
+// Estudo de caso: Na vida real um mercado com certeza teria mais de um sensor, 
+então essas duas tabelas abaixo representam este caso, de vários sensores para várias filiais.
+ 
+==== Tabela que registra os sensores instalados. Obs: Relacionada a tabela 'Filial'.
+Sensor_Filial(
+cod_sensor_filial;
+descricao; -- Nome do sensor/tipo
+identificacao; -- Identificação única que daremos ao sensor
+cod_filial; -- Código da filial a qual esse sensor pertence
+data_cadastro
+);
+
+
+==== Tabela que recebe os dados de todas as 'movimentações' dos sensores. Obs: Relacionada a tabela 'Sensor_Filial'.
+Historico_sensor(
+cod_historico;
+info_sensor; -- A informção que o sensor está passando (0 ou 1 = passou alguém ou não passou)
+cod_sensor_filial;
+data_hora_info; -- Data e hora atual do cadastro da informação (Dia 20/03/2020 às 14:20:09 'passou alguém', Dia 20/03/2020 às 14:25:34 'passou alguém')
+);
+
+
+

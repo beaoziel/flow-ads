@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flow - Login</title>
+    <link rel="stylesheet" href="./stylesheets/index.css">
+    <script src="funcoes.js"></script>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <div style="height: 10px;">
+                <img src="./img/carregamentos/load_login.gif" id="img_aguarde" style="display: none; height: 5px;">
+            </div>
+            <form id="form_cadastro" method="post" onsubmit="return cadastrar()">
+                <h1 style="margin-bottom: 12%; color: rgb(107, 107, 107);">Crie sua conta</h1>
+                <div id="div_erro_senha" style="height: 20px; margin-bottom: 10px;"></div>
+                <span style="font-weight: 500; font-size: 16px;">Use um email para realizar o cadastro</span>
+                <div class="label-float">
+                    <input type="text" placeholder=" " name="email" class="email" type="email" minlength="5" maxlength="35" required>
+                    <label for="">Email</label>
+                </div>
+                <div class="label-float">
+                    <input type="password" placeholder=" " id="senha"  name="senha" class="senha" minlength="4" maxlength="15" required>
+                    <label for="">Senha</label>
+                </div>
+                <div class="label-float">
+                    <input type="password" placeholder=" " id="confirma_senha" name="password" class="senha" minlength="4" maxlength="15" required>
+                    <label for="">Confirmar senha</label>
+                </div>
+                <div class="label-float">
+                    <input type="text" placeholder=" " name="token" class="email" required>
+                    <label for="">Token</label>
+                </div>
+                <button style="margin-top: 10px;" class="entrar">Cadastrar</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <div style="height: 10px;">
+                <img src="./img/carregamentos/load_login.gif" id="img_aguarde_login" style="display: none; height: 5px;">
+            </div>
+            <form id="form_login" method="post" onsubmit="return entrar()">
+                <h1 style="margin-bottom: 12%;"><img src="./img/ideia01.png" alt=""></h1>
+                <div style="width: 100%;"><span style="font-weight: 500; font-size: 18px;">Entre em sua conta</span></div>
+                <div style="height: 35px; width: 100%; margin-top: 5px;">
+                    <span id="span_message"></span>
+                </div>
+                <div class="label-float">
+                    <input type="text" placeholder=" " class="email" id="input_email" name="login" required>
+                    <label for=""> Email</label>
+                </div>
+                <div class="label-float">
+                    <input type="password" placeholder=" " class="senha" id="input_pass" name="senha" required>
+                    <label for="">Senha</label>
+                </div>
+                <br>
+                <div style="width: 100%;"><a href="#" style=" float: left;">Esqueceu sua senha?</a></div> 
+                <button class="entrar" style="float: left;" id="btn">Entrar</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Bem vindo!</h1>
+                    <p>Caso ja possua um cadastro, entre em sua conta!</p>
+                    <button class="ghost" id="signIn">Entrar</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Olá, usuário!</h1>
+                    <p>Caso ainda não possua cadastro, crie sua conta!</p>
+                    <button class="ghost" id="signUp">Cadastre-se</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="div_erro" style="background-color: sandybrown; color: maroon; display: none;">
+        
+    </div>
+
+</body>
+
+</html>
+<script>
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const container = document.getElementById('container');
+
+    signUpButton.addEventListener('click', () => {
+        container.classList.add("right-panel-active");
+    });
+
+    signInButton.addEventListener('click', () => {
+        container.classList.remove("right-panel-active");
+    });
+
+    function entrar() {
+        aguardar_login();
+        var formulario = new URLSearchParams(new FormData(form_login));
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            body: formulario
+        }).then(resposta => {
+            
+            if (resposta.ok) {
+
+                resposta.json().then(json => {
+                    sessionStorage.login_usuario_meuapp = json.email;
+                    sessionStorage.nome_usuario_meuapp = json.email;
+                    sessionStorage.setItem('id' , json.cod_usuario);
+                    sessionStorage.cod_usuario_meuapp = json.cod_usuario;
+
+                    if(json.fk_tipo_usuario == 1){
+                        window.location.href = 'consulta_mercados.html';
+                    }else{
+                        window.location.href = 'grafico-chartjs.html';
+                    }
+                });
+
+            } else {
+
+                console.log('Erro de login!');
+                alert('Usario ou senha incorretos');
+                input_email.value =  '';
+                input_pass.value = '';
+                finalizar_aguardar2();
+                response.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+        });
+
+        return false;
+    }
+
+    function cadastrar() {
+        aguardar();
+        if(senha.value != confirma_senha.value){
+            event.preventDefault();
+            div_erro_senha.innerHTML = "<span> As senhas estão diferentes </span>";
+            finalizar_aguardar();
+        }else{
+            var formulario = new URLSearchParams(new FormData(form_cadastro));
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                body: formulario
+            }).then(function (response) {
+                if (response.ok) {
+                    alert("Cadastrado com sucesso");
+                    window.location.href = 'login.html';
+                } else {
+                    alert("Token inválido!");
+                    finalizar_aguardar();
+                }
+            });
+
+            return false;
+        }
+    }
+
+    function finalizar_aguardar2() {
+        btn.disabled = false;
+        btn.style.background = "#32CDA7";
+        img_aguarde_login.style.display = 'none';
+        //img_aguarde.style.display= 'none';
+        //div_erro.style.display = 'block';
+        //div_erro.innerHTML = resposta;
+    }
+</script>

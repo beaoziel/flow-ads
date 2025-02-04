@@ -1,0 +1,132 @@
+body{
+    letter-spacing: 0px;
+    color: #757575;
+    opacity: 1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    outline: none;
+}
+
+.cards {
+    margin-top: 50px;
+    width: 100%;
+    margin-right: 90px;
+    display: flex;
+}
+
+.card-add {
+    width: 39%;
+    height: 375px;
+    background-color: #FFF;
+    box-shadow: 2px 3px 10px #0000001A;
+    border-radius: 25px;
+    margin: 0px 0 0 65px;
+    padding: 30px 0 0 34px;
+}
+
+.card-consulta {
+    width: 480px;
+    height: 515px;
+    background: #FFFFFF;
+    box-shadow: 2px 3px 10px #0000001A;
+    border-radius: 25px;
+    opacity: 1;
+    margin: 0 55px 0 50px;
+}
+
+.fundo {
+    width: 437px;
+    height: 380px;
+    background: #F3F3F3;
+    box-shadow: 2px 3px 10px #00000029;
+    border-radius: 20px;
+    opacity: 1;
+    margin: 35px 21px 0 21px;
+    padding-top: 20px;
+    overflow:auto;
+}
+
+
+.registros {
+    width: 80%;
+    height: 49px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    opacity: 1;
+    margin: 0 0 10px 30px;
+    padding: 13px 0 0 29px;
+}
+
+.registros-imgs {
+    float: right;
+    margin: 5px 15px 0 0;
+}
+
+.registros img{
+    height: 23px;
+    margin:0 0 10px 10px;
+}
+
+.registros h2{
+    font-weight: 400;
+    float: left;
+    font-size: 20px;
+}
+
+.card-add input {
+    width: 83%;
+    margin: 10px 0 0 0;
+    height: 48px;
+    border: 1px solid #7070704D;
+    border-radius: 10px;
+    padding-left: 25px;
+    font-size: 16px;
+    opacity: 1;
+}
+
+.card-add button {
+    display: block;
+    width: 161px;
+    height: 44px;
+    color: #FFFFFF;
+    background: #32CDA7;
+    box-shadow: 2px 3px 10px #00000029;
+    border-radius: 10px;
+    opacity: 1;
+    float: right;
+    margin: 18px 47px 0px 0;
+}
+
+h4{
+    font-weight: 400;
+}
+
+.card-add h4 {
+    padding-bottom: 15px;
+    font-size: 25px;
+}
+
+.card-consulta h4{
+    margin: 30px 0 0 25px;
+    font-size: 25px;
+}
+
+.container h1 {
+    font-weight: 600;
+    font-size: 35px;
+    margin: 35px 0 0 28px;
+}
+
+/* Estilização específica para o formulário de edição de perfil(adm e cliente) */
+.card-edita h4 {
+    font-size: 22px;
+}
+
+.card-edita input{
+    width: 91%
+}
+
+.card-edita button{
+    width: 120px; 
+    margin-right: 5; 
+    height: 40px;
+}

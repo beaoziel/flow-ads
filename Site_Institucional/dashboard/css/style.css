@@ -1,0 +1,369 @@
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+    background-image: url('../img/back.png');
+    background-size: cover;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-family: 'Montserrat', sans-serif;
+	height: 100vh;
+    margin: auto;
+}
+
+h1 {
+	font-weight: bold;
+	margin: 0;
+}
+
+h2 {
+	text-align: center;
+}
+
+p {
+	font-size: 14px;
+	font-weight: 100;
+	line-height: 20px;
+	letter-spacing: 0.5px;
+	margin: 20px 0 30px;
+}
+
+span {
+	font-size: 12px;
+}
+
+a {
+	color: #1EA88C;
+	font-size: 14px;
+	text-decoration: none;
+	margin: 15px 0;
+}
+
+button {
+	border-radius: 20px;
+	border: 1px solid #1EA88C;
+	background-color: #1EA88C;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    cursor: pointer;
+}
+
+button:active {
+	transform: scale(0.95);
+}
+
+button:focus {
+	outline: none;
+}
+
+button.ghost {
+	background-color: transparent;
+	border-color: #FFFFFF;
+}
+
+.entrar:hover{
+    background-color: rgb(21, 114, 95);
+    border: solid 1px rgb(21, 114, 95);
+}
+
+form {
+	background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 50px;
+	height: 100%;
+    text-align: center;
+}
+
+.email{
+    text-decoration: none;
+    border-radius: 3px;
+    display: inline-block;
+    width: 100%;
+    font-size: 16px;
+    border: solid 1px rgba(185, 185, 185, 0.651);
+    height: 45px;
+    color: rgba(43, 43, 43, 0.753);
+    background-color: white;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.email:hover{
+		border-left: solid 2px #1EA88C;
+		transition: all .3s ease 0s;
+}
+
+.email:focus, input:focus, select:focus {
+    box-shadow: 0 0 0 ;
+    outline: 0;
+}
+
+.email:focus{
+    border-left: solid 2px #1EA88C;
+}
+
+.senha{
+    text-decoration: none;
+    border-radius: 3px;
+    display: inline-block;
+    width: 100%;
+    font-size: 16px;
+    border: solid 1px rgba(185, 185, 185, 0.651);
+    height: 45px;
+    color: rgba(43, 43, 43, 0.753);
+    background-color: white;
+    padding: 5px;
+    margin-top: 5px;
+    
+}
+
+.senha:hover{
+    border-left: solid 2px #1EA88C;
+    transition: all .3s ease 0s;
+}
+
+.senha:focus, input:focus, select:focus {
+    box-shadow: 0 0 0 ;
+    outline: 0;
+}
+
+.senha:focus{
+    border-left: solid 2px #1EA88C;
+}
+
+.label-float{
+    position: relative;
+    width: 100%;
+    margin-right: auto; 
+  }
+
+  .label-float input{
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    outline: none;
+    min-width: 180px;
+    font-size: 14px;
+    color: rgba(85, 85, 85, 0.829);
+    transition: all .3s ease-out;
+    -webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -webkit-appearance:none;
+    padding-top: 20px;
+  }
+  
+  .label-float input::placeholder{
+    color:transparent;
+  }
+  
+  .label-float label{
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 12px;
+    color: rgba(93, 93, 93, 0.651);
+    padding: 5px;
+    transition: all .3s ease-out;
+    -webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+  }
+
+  .label-float input:required:invalid + label:before{
+    content: '*';
+  }
+  .label-float input:focus + label,
+  .label-float input:not(:placeholder-shown) + label{
+    font-size: 13px;
+    margin-top: 5px;
+    color: #1EA88C;
+  }
+
+
+
+.container {
+	background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 70%;
+	max-width: 100%;
+	min-height: 550px;
+}
+
+.form-container {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	transition: all 0.6s ease-in-out;
+}
+
+.sign-in-container {
+	left: 0;
+	width: 50%;
+	z-index: 2;
+}
+
+.container.right-panel-active .sign-in-container {
+	transform: translateX(100%);
+}
+
+.sign-up-container {
+	left: 0;
+	width: 50%;
+	opacity: 0;
+	z-index: 1;
+}
+
+.container.right-panel-active .sign-up-container {
+	transform: translateX(100%);
+	opacity: 1;
+	z-index: 5;
+	animation: show 0.6s;
+}
+
+@keyframes show {
+	0%, 49.99% {
+		opacity: 0;
+		z-index: 1;
+	}
+	
+	50%, 100% {
+		opacity: 1;
+		z-index: 5;
+	}
+}
+
+.overlay-container {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+	transition: transform 0.6s ease-in-out;
+	z-index: 100;
+}
+
+.container.right-panel-active .overlay-container{
+	transform: translateX(-100%);
+}
+
+.overlay {
+	background-image: url('../img/talvez.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0 0;
+	color: white;
+	position: relative;
+	left: -100%;
+	height: 100%;
+	width: 200%;
+  	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
+}
+
+.container.right-panel-active .overlay {
+  	transform: translateX(50%);
+}
+
+.overlay-panel {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 40px;
+	text-align: center;
+	top: 0;
+	height: 100%;
+	width: 50%;
+	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
+}
+
+.overlay-left {
+	transform: translateX(-20%);
+}
+
+.container.right-panel-active .overlay-left {
+	transform: translateX(0);
+}
+
+.overlay-right {
+	right: 0;
+	transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-right {
+	transform: translateX(20%);
+}
+
+.social-container {
+	margin: 20px 0;
+}
+
+.social-container a {
+	border: 1px solid #DDDDDD;
+	border-radius: 50%;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 5px;
+	height: 40px;
+	width: 40px;
+}
+
+#span_message{
+	color: rgb(236, 8, 8);
+	font-size: 12px;
+}
+
+
+
+.cor{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    animation: cores 10s;
+    display: none;
+    background-color: #f3f3f3;
+}
+
+.anini{
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.animacaoLogin{
+    width: 44vh;
+    height: 34vh;
+    -webkit-animation: mymove 5s ; /* Safari 4.0 - 8.0 */
+    animation: mymove 10s infinite;
+    margin: auto;
+}
+    
+  @keyframes mymove {
+    0%   {opacity: 0;}
+    35% {opacity: 1;}
+    45% {opacity: 0;}
+    100% {opacity: 1;}
+  }

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./stylesheets/sidebar.css">
+    <link rel="stylesheet" href="./stylesheets/home.css">
+    <!-- scripts do Chart.js -->
+    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+    <script type="text/javascript" src="https://www.chartjs.org/samples/latest/utils.js"></script>
+    <script type="text/javascript" src="funcoes.js"></script>
+    <script type="text/javascript" src="./js/mercado.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+</head>
+
+<body onload="atualizarGrafico();">
+    <div class="sidebar">
+        <img src="../img/logotipo.png" alt="">
+       
+        <a href="#" class="links clicked">
+            <img id="link1" src="../img/dashboardgrenn.png">
+            <p>Dashboard</p>
+        </a>
+        
+        <a href="" onclick="consultar_cliente_edita()" class="links">
+            <img id="link4" src="../img/user.png">
+            <p>Meu perfil</p>
+        </a>
+
+        <a href="./heatmap.html" class="links">
+            <img id="link3" src="../img/fire.png">
+            <p>Heatmap</p>
+        </a>
+
+        <a href="#" class="links">
+            <img id="link4" src="../img/statistics.png">
+            <p>Relatório</p>
+        </a>
+
+        <a href="#"  class="links">
+            <img id="link5" src="../img/settings.png">
+            <p>Configurações</p>
+        </a>
+    </div>
+    <main>
+        <nav>
+            <div class="container">
+                <div>
+                    <p id="nomeMercado" style="font-weight: 700; font-size: 35px; color: #2b2b2b9f;"></p>
+                </div>
+                <div class="user">
+                    <p id="b_usuario"></p>
+                    <a href="#" onclick="logoff()"><img src="./img/icons/logout.png" alt="Seta"></a>
+                </div>
+            </div>
+        </nav>
+        <div class="cards">
+            <div class="container">
+                <div class="card">
+                    <div class="esquerda">
+                        <div class="icon">
+                            <i class="fas fa-user fa-2x" style="color: #FDB52F;"></i>
+                        </div>
+                    </div>
+                    <div class="lados direita">
+                        <h3 class="titulo-card">Fluxo do dia</h3>
+                        <p  class="num-card" id="diario"></p>
+                        <p class="text-card">Pessoas</p>
+                        <p class="analytics-card" id="fluxoDiario"></p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="esquerda">
+                        <div class="icon semana">
+                            <i class="fas fa-users fa-2x" style="color: #49EEDE;"></i>
+                        </div>
+                    </div>
+                    <div class="lados direita">
+                        <h3 class="titulo-card">Fluxo da Semana</h3>
+                        <p  class="num-card" id="semanal"></p>
+                        <p class="text-card">Pessoas</p>
+                        <p class="analytics-card" id="fluxoSemanal"></p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="esquerda">
+                        <div class="icon mes">
+                            <i class="fas fa-calendar-alt fa-2x" style="color: #2C60C5;"></i>
+                        </div>
+                    </div>
+                    <div class="lados direita">
+                        <h3 class="titulo-card">Fluxo do mês</h3>
+                        <p  class="num-card" id="mensal"></p>
+                        <p class="text-card">Pessoas</p>
+                        <p class="analytics-card" id="fluxoMensal"></p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="esquerda">
+                        <div class="icon melhor">
+                            <i class="fas fa-star fa-2x" style="color: #FF5D5B;"></i>
+                        </div>
+                    </div>
+                    <div class="lados direita">
+                        <h3 class="titulo-card">Melhor mês</h3>
+                        <p class="num-card" id="melhorMes"></p>
+                        <p class="text-card">Pessoas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="graphs">
+            <div class="container">
+                <div class="graph large">
+                    <div id="div_aguarde">Dados sendo obtidos...</div>
+                    <canvas id="canvas_grafico" style="width: 100%; height:100%"></canvas>
+                </div>
+
+                <div class="graph">
+                    <!-- <canvas id="grafico3" style="width: 100%; height:100%"> -->
+                    <canvas id="grafico2" style="width: 100%;
+                    height: 100%;"></canvas>
+                    </canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="graphs">
+            <div class="container">
+                <div class="graph large">
+                    <!-- <canvas id="grafico2" style="width: 100%;
+                    height: 100%;"></canvas> -->
+                    <canvas id="grafico3" style="width: 100%; height:100%"></canvas>
+                </div>
+
+                <div class="graph">
+                    <canvas id="grafico4" style="width: 100%; height:100%">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
+    </main>
+    <!-- <div>
+        Olá, <b id="b_usuario"></b>
+        <a href="#" onclick="logoff()" style="color:maroon">[Sair]</a>
+
+        <a href="tempo-real.html">Tempo Real</a>
+    </div>
+    <div style="width:75%;">
+        <div id="div_aguarde">Dados sendo obtidos...</div>
+        <canvas id="canvas_grafico"></canvas>
+    </div> -->
+</body>
+
+</html>
+<script>
+    getMercado();
+</script>
+<script type="text/javascript">
+    // <![CDATA[
+    var ttChatLoaderS = document.createElement('script');
+    document.tomticketChatLoaderScriptVersion = 2;
+    ttChatLoaderS.src = 'https://flow-pi.tomticket.com/scripts-chat/chat.min.js'
+    + '?id=EP46600'
+    + '&account=2982400P10062020014750'
+    + '&autoOpen=0'
+    + '&hideWhenOffline=0'
+    + '&d=flow-pi'
+    + '&ts=' + new Date().getTime()
+    + '&ref=' + encodeURIComponent(document.URL);
+    document.body.appendChild(ttChatLoaderS);
+    //]]>
+</script>
+<script src="./js/grafico2.js"></script>
+<script src="./js/grafico4.js"></script>
+<script src="./js/grafico3.js"></script>
+<script src="./js/grafico1.js"></script>
+<script src="./js/cards.js"></script>
+
+

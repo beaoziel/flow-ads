@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./stylesheets/sidebar.css">
+    <link rel="stylesheet" href="./stylesheets/heatmap.css">
+    <link rel="stylesheet" href="./stylesheets/home.css">
+    <script src="funcoes.js"></script>
+    
+</head>
+
+<body>
+    <div class="sidebar">
+        <img src="../img/logotipo.png" alt="">
+       
+        <a href="./grafico-chartjs.html" class="links">
+            <img id="link1" src="../img/dashboard.png">
+            <p>Dashboard</p>
+        </a>
+        
+        <a href="" onclick="consultar_cliente_edita()" class="links">
+            <img id="link4" src="../img/user.png">
+            <p>Meu perfil</p>
+        </a>
+
+        <a href="./heatmap.html" class="links clicked">
+            <img id="link3" src="../img/firegreen.png">
+            <p>Heatmap</p>
+        </a>
+
+        <a href="#" class="links">
+            <img id="link4" src="../img/statistics.png">
+            <p>Relatório</p>
+        </a>
+
+        <a href="#"  class="links">
+            <img id="link5" src="../img/settings.png">
+            <p>Configurações</p>
+        </a>
+    </div>
+    <main>
+        <nav>
+            <div class="container">
+                <select name="" id="tempo" onchange="trocarHeatMap()">
+                    <option value="1">Último dia</option>
+                    <option value="7">Última semana</option>
+                    <option value="30">Último mês</option>
+                </select>
+                <div class="user">
+                    <p id="b_usuario"></p>
+                    <a href="#" onclick="logoff()"><img src="./img/icons/logout.png" alt="Seta"></a>
+                </div>
+            </div>
+        </nav>
+        <div class="content">
+            <div class="container">
+                <div class="heatmap">
+                    <img src="./img/planta.jpg" alt="">
+                </div>
+                <div class="infos">
+                    <h3>Informações</h3>
+                    <p>Maior movimento: <span id="saidaMaxMovimento">1</span></p>
+                    <p>Sensor: <span id="saidaMaxSensor">1</span></p>
+                    <p>Menor movimento: <span id="saidaMinMovimento">1</span></p>
+                    <p>Sensor: <span id="saidaMinSensor">1</span></p>
+                    <p>Última atualização: <br> <span id="ultimaAtualizacao"></span></p>
+                </div>  
+            </div>
+        </div>
+    </main>
+</body>
+
+<script src="./heatmap.js"></script>
+<script>
+verificar_autenticacao();
+const id = sessionStorage.id;
+
+window.onload = () => {
+    heatMap(1);
+};
+
+function trocarHeatMap() {
+    const dias = tempo.value;
+    console.log(dias);
+    heatMap(dias);
+}
+
+var heatmapInstance = h337.create({
+
+container: document.querySelector('.heatmap')
+});
+
+function heatMap(dias){
+fetch(`/leituras/heatmap/${dias}/${id}` , { cache: 'no-store' })
+    .then(function (response) {
+        if(response.ok) {
+            response.json().then(function (dados) {
+                console.log(dados);    
+
+                let value = 0;
+
+                var points = [];
+                var width = 900;
+                var height = 550;
+                var max = {
+                    valor: 0,
+                    identificacao: ''
+                };
+                var min = {
+                    valor: 100000,
+                    identificacao: ''
+                };
+
+
+                for (let i = 0; i < dados.length; i++) {
+
+                    if(dados[i].count > max.valor) {
+                        max.valor = dados[i].count;
+                        max.identificacao = dados[i].identificacao
+                    }
+
+                    if(dados[i].count < min.valor) {
+                        min.valor = dados[i].count;
+                        min.identificacao = dados[i].identificacao
+                    }
+
+                    value = dados[i].count;
+
+                    let point = {
+                    x: dados[i].x,
+                    y: dados[i].y,
+                    value: value,
+                    radius: dados[i].raio
+                    };
+
+                    points.push(point);   
+                    
+                }
+            
+                data = {
+                    max: max.valor,
+                    data: points
+                };
+
+                generateHeatMap(data);
+
+                saidaMaxMovimento.innerHTML = max.valor;
+                saidaMaxSensor.innerHTML = max.identificacao;
+                saidaMinMovimento.innerHTML = min.valor;
+                saidaMinSensor.innerHTML = min.identificacao;
+
+                let now = new Date();
+                let dia = now.getDate();
+                let mes = now.getMonth();
+                let ano = now.getFullYear();
+                let hora = now.getHours();
+                let minuto = now.getMinutes();
+                let segundos = now.getSeconds();
+
+                ultimaAtualizacao.innerHTML = `${dia < 10 ? dia = '0'+dia : dia = dia}/${mes < 10 ? mes = '0'+ mes : mes = mes}/${ano} ${hora}:${minuto < 10 ? minuto = '0' + minuto : minuto = minuto}:${segundos < 10 ? segudos = '0' + segundos : segundos = segundos}`;
+
+            })
+        }
+    })
+    .catch(erro => {
+        console.error(erro);
+        
+    });
+}
+
+function generateHeatMap(data) {
+    heatmapInstance.setData(data);
+}
+</script>
+</html>

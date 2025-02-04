@@ -1,0 +1,147 @@
+<script>
+    history.forward();
+</script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./stylesheets/sidebar.css">
+    <link rel="stylesheet" href="./stylesheets/home.css">
+    <link rel="stylesheet" href="./stylesheets/forms.css">
+    <link rel="stylesheet" href="./stylesheets/globals.css">
+    <title>Flow - Meu perfil</title>
+
+    <script src="funcoes.js"></script>
+
+</head>
+
+<body>
+    <div class="sidebar">
+        <img src="../img/logotipo.png" alt="">
+       
+        <a href="grafico-chartjs.html" class="links">
+            <img id="link1" src="../img/dashboard.png">
+            <p>Dashboard</p>
+        </a>
+        
+        <a href="" onclick="consultar_cliente_edita()" class="links clicked">
+            <img id="link4" src="../img/usergreen.png">
+            <p>Meu perfil</p>
+        </a>
+
+        <a href="./heatmap.html" class="links">
+            <img id="link3" src="../img/fire.png">
+            <p>Heatmap</p>
+        </a>
+
+        <a href="#" class="links">
+            <img id="link4" src="../img/statistics.png">
+            <p>Relatório</p>
+        </a>
+
+        <a href="#"  class="links">
+            <img id="link5" src="../img/settings.png">
+            <p>Configurações</p>
+        </a>
+    </div>
+    <main>
+        <nav>
+            <div class="container">
+                <h1>Perfil</h1>
+                <div class="logout">
+                    <a href="#" onclick="logoff()"><img src="./img/icons/logout.png" alt="Seta"></a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="cards"> 
+
+            <div class="card-add card-edita" style="height: 100%; width: 35%; padding-left: 0px !important; padding-top: 0px !important;">
+                <div style="height: 50%; width: 100%; float: left; display: flex; justify-content: center; align-items: center; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                    <div style="border: solid 1px #1ea88cb6; display: flex; justify-content: center; align-items: center; border-radius: 100%; width: 140px; height: 140px;">
+                        <img src="img/user-perfil.png" alt="" style="width: 60%;">
+                    </div>     
+                </div>
+
+                <div style="height: 50%; width: 100%; float: left; display: flex; justify-content: center; align-items: center; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                    <div style=" width: 80%; height: 150px;">
+                        <h3>Descrição</h3>
+                        <p  style="padding-top: 15px; font-size: 18px;">Edite suas informações pessoais, faça alterações no seu email ou senha na tela ao lado.</p>
+                    </div>     
+                </div>
+
+            </div>
+
+            <div class="card-add card-edita" style="height: 335px; width: 46%; margin-left: 2% !important;">
+                <h4>Olá, <span id="meu_nome"></span></h4>
+                <div id="div_erro" style="height: 25px;"></div>
+                <form id="form_cadastro" method="post" onsubmit="return editar()" autocomplete="off">
+                    <input type="email" placeholder="Email" id="email2" name="email" class="email" type="email"
+                        minlength="5" maxlength="35" disabled="true" required>
+
+                    <input type="text" placeholder="Senha" id="senha2" name="senha" minlength="4" maxlength="15"
+                        class="senha" disabled="true" required>
+
+                    <input type="text" placeholder="Senha" disabled="true" id="confirma_senha2" name="password" class="senha" required>
+                    <button id="btn" style="margin-right: 40px;"">Salvar</button>
+                </form>
+                <button id="btn_edita" onclick="habilita_edicao()">Editar</button>
+                <img src="./img/carregamentos/load.gif" id="img_aguarde" style="display: none; height: 70px;">
+            </div>   
+        </div>
+    </main>
+</body>
+
+</html>
+
+<script>
+    consultar_usuario();
+
+    function editar() {
+        aguardar();
+        if (senha2.value != confirma_senha2.value) {
+            event.preventDefault();
+            div_erro.innerHTML = "<p>As senhas estão diferentes!</p>";
+            btn.style.background = "#32CDA7";
+            btn.disabled = true;
+            finalizar_aguardar();
+        } else {
+            var formulario = new URLSearchParams(new FormData(form_cadastro));
+            fetch("/usuarios/edita", {
+                method: "POST",
+                body: formulario
+            }).then(function (response) {
+
+                if (response.ok) {
+                    alert("Cliente editado!");
+                    window.location.href = 'edicao_cliente.html';
+                } else {
+                    alert('Erro de edição!');
+                    finalizar_aguardar();
+                }
+            });
+        }
+
+        return false;
+    }
+
+
+    function consultar_usuario() {
+        fetch(`/usuarios/edicao`, { cache: 'no-store' })
+            .then(resposta => {
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        document.getElementById("email2").value = `${json[0].email}`;
+                        document.getElementById("senha2").value = `${json[0].senha}`;
+                        meu_nome.innerHTML = `${json[0].email}`;
+                    })
+                } else {
+                    alert("Algo deu errado ;(");
+                }
+            });
+    }
+
+</script>

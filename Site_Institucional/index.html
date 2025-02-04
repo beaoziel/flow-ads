@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
+    <script src="./js/script.js"></script>
+    <script src="./js/jquery-3.5.0.js"></script>
+</head>
+<body>
+    <header id="sumir">
+        <nav class="flex menu">
+            <div class="flex container">
+                <div id="area-logo"><img src="./img/ideia01.png" alt="" class="logo"></div>
+                <ul id="menu" class="flex">
+                    <li class="item-menu"><a href="#home">HOME</a></li>
+                    <li class="item-menu"><a href="#sobre">SOBRE</a></li>
+                    <li class="item-menu"><a href="#servicos">SERVIÇOS</a></li>
+                    <li class="item-menu"><a href="#planos">PLANOS</a></li>
+                    <li class="item-menu"><a href="#contato">CONTATO</a></li>
+                    <button class="tela_cad" onclick="flow()">FLOW</button>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="cor">
+        <div class="anini">
+        <div class="animacaoLogin">
+            <img src="./img/ideia01.png" alt="" style="width: 100%;"> 
+        </div>
+    </div>
+    </div>
+
+    <main class="back" id="pageSumir">
+        <section id="home">
+            <div class="texto">
+                <div class="teste">
+                    <h3 class="titulo_home">
+                        A forma inteligente de analisar o fluxo de pessoas.
+                    </h3>
+                    <p class="text_home">
+                        A Flow leva para o seu negócio e tecnologia de análise de fluxo
+                        de passagem de pessoas. Com os dados obtidos pelos nossos sensores
+                        conheça melhor seu cliente, crie novas estratégias e amplie seus lucros.
+                    </p>
+                    <button class="button_home">SOBRE<i class="fa fa-exclamation-circle" aria-hidden="true" style="padding-left: 8px;"></i></button>
+                    <button class="button_veja_mais">VEJA MAIS<i class="fa fa-arrow-down" aria-hidden="true" style="padding-left: 8px;"></i></button>
+                </div>
+            </div>
+            <div class="area_img_home">
+                <div class="img_home">
+                    <img src="./img/imgHome.png" alt="" style="width: 100%;">
+                </div>
+            </div>
+
+
+
+            <!--SOBRE-->
+            
+            <div class="img_sobre" id="sobre">
+                <h3>SOBRE NÓS<br></h3>
+                <div class="area_img_sobre">
+                    <img src="./img/imgSobre.png" alt="" style="width: 100%;">
+                </div>
+            </div>
+            
+            <div class="area_cards">
+                <div class="cards">
+                    <div class="card_missao">
+                        <div class="img_missao">
+                            <img src="./img/iconmissao.png" alt="" style="width: 60%;">
+                        </div>
+                        <h3>
+                            MISSÃO
+                        </h3>
+                        <div class="risca1"></div>
+                        <p>
+                            Auxiliar na solução de problemas e desenvolvimento de empresas do setor de vendas fisícas,
+                            através da implantação de sensores e coleta de dados sobre o fluxo de pessoas.
+                        </p>
+                    </div>
+
+                    <div class="card_visao">
+                        <div class="img_visao">
+                            <img src="./img/iconvisao.png" alt="" style="width: 60%;">
+                        </div>
+                        <h3>
+                            VISÃO
+                        </h3>
+                        <div class="risca"></div>
+                        <p>
+                            Estar entre as melhores empresas de tecnologia do 
+                            Brasil, proporcionando um ambiente de trabalho
+                            saudável para o desenvolvimento dos nossos colaboradores.
+                        </p>
+                    </div>
+
+                <!--    <div class="card_valores">
+                        <div class="img_valores">
+                            <img src="./img/iconvalores.png" alt="" style="width: 60%;">
+                        </div>
+                        <h3>
+                            VALORES
+                        </h3>
+                        <div class="risca1"></div>
+                        <p>
+                            Respeito <br>
+                            Ética <br>
+                            Inovação <br>
+                            Colaboração <br>
+                            Qualidade
+                        </p>
+                    </div>-->
+
+            <!--FIM SOBRE-->
+
+            </div>
+        </div>
+        <!--SERVICOS-->
+        <div id="servicos" class="container-servicos">
+            <div class="area_cima">
+                <div class="sistema">
+                    <div class="titulo_servicos">
+                        <h3 style="font-size: 35px; color: white; margin-left: 10%;">SERVIÇOS</h3>
+                    </div>
+                    <div class="text_sistema">
+                        <h3>SISTEMA</h3>
+                        <p>Nosso sistema possibilita manter o controle de fluxo do seu estabelecimento através de um sensor
+                           óptico instalado tanto na entrada quanto na saída do hipermercado. Os dados obtidos são encaminhados
+                           a nuvem através de uma rede de internet local.</p>
+                    </div>
+                </div>
+                <div class="img_processos">
+                    <img src="./img/processo.png" alt="" style="width: 100%;">
+                </div>
+                <div class="consulta">
+                    <div class="text_consulta">
+                        <h3>CONSULTA</h3>
+                        <p>Neste item temos a análise do desempenho pelo usuário do fluxo de pessoas, de como foi a execução de
+                            movimentação local do estabelecimento em gráficos específicos através da  plataforma web do grupo Flow.
+                            Temos a execução de um trabalho remoto: onde é permitido o acesso de todos os dados através de um computador
+                             ou notebook.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="area_baixo">
+                <div class="img_sistema">
+                    <img src="./img/18907.png" alt="" style="width: 100%;">
+                </div>
+                <div class="processos">
+                    <div class="text_processos">
+                        <h3>PROCESSOS</h3>
+                        <p>Como parte do processo os dados encaminhados a nuvem sofrem um tratamento. Lá hospedamos os 
+                            mais variados recursos, programas e informações
+                            para facilitar a experiência do nosso usuário.</p>
+                    </div>
+                </div>
+                <div class="img_consulta">
+                    <img src="./img/19199.png" alt="" style="width: 98%;">
+                </div>
+            </div>
+        </div>
+        <!--FIM SERVICOS-->
+        <div id="planos" class="area_cards_planos">
+            <div class="card_um">
+                <div class="img-card-um"  style="background-color: rgba(255, 166, 0, 0.808);">
+                    <div class="preco">
+                        <img src="./img/electronics.png" alt="" style="width: 100%;">
+                    </div>
+                        <h3>Plano mensal</h3>
+                        <p style="font-size: 35px; color: #f3f3f3; text-align: center;"><span style="font-size: 15px;">R$</span>500<span style="font-size: 15px;">.00</span></p>
+                    </div>
+                    <p><i class="far fa-check-circle" style="padding-right: 10px; color: #1EA88C;"></i>1 mês de uso</p>
+                    <p><i class="far fa-check-circle" style="padding-right: 10px; color: #1EA88C;"></i>Até 5 Sensores</p> 
+                    <p><i class="far fa-check-circle" style="padding-right: 10px; color: #1EA88C;"></i>Suporte Técnico</p> 
+                    <p><i class="far fa-check-circle" style="padding-right: 10px; color: #1EA88C;"></i>Acesso ao sistema</p> 
+                    <p><i class="far fa-check-circle" style="padding-right: 10px; color: #1EA88C;"></i>Visualização</p>  
+                </div>
+            <div class="card_dois">
+                <div class="img-card-um" style="background-color: rgba(108, 7, 241, 0.705);">
+                    <div class="preco">
+                        <img src="./img/electronics.png" alt="" style="width: 100%;">
+                    </div>
+                        <h3>Plano semestral</h3>
+                        <p style="font-size: 35px; color: #f3f3f3; text-align: center;"><span style="font-size: 15px;">R$</span>3.000<span style="font-size: 15px;">.00</span></p>
+                    </div>
+                    <p><i class="far fa-check-circle" style="padding-right: 10px; color: #1EA88C;"></i>6 meses de uso</p>
+                    <p><i class="far fa-check-circle" style="padding-right: 10px; color: #1EA88C;"></i>Até 10 Sensores</p> 
+                    <p><i class="far fa-check-circle" style="padding-right: 10px; color: #1EA88C;"></i>Suporte Técnico</p> 
+                    <p><i class="far fa-check-circle" style="padding-right: 10px; color: #1EA88C;"></i>Acesso ao sistema</p> 
+                    <p><i class="far fa-check-circle" style="padding-right: 10px; color: #1EA88C;"></i>Visualização</p>  
+                </div>
+            <div class="card_tres">
+                <div class="img-card-um">
+                    <div class="preco">
+                        <img src="./img/electronics.png" alt="" style="width: 100%;">
+                    </div>
+                        <h3>Plano anual</h3>
+                        <p style="font-size: 35px; color: #f3f3f3; text-align: center;"><span style="font-size: 15px;">R$</span>5.000<span style="font-size: 15px;">.00</span></p>
+                    </div>
+                    <p><i class="far fa-check-circle" style="padding-right: 10px; color: rgb(209, 209, 0);"></i>12 meses de uso</p>
+                    <p><i class="far fa-check-circle" style="padding-right: 10px; color: rgb(209, 209, 0);"></i>Até 15 Sensores</p> 
+                    <p><i class="far fa-check-circle" style="padding-right: 10px; color: #1EA88C;"></i>Suporte Técnico</p> 
+                    <p><i class="far fa-check-circle" style="padding-right: 10px; color: #1EA88C;"></i>Acesso ao sistema</p> 
+                    <p><i class="far fa-check-circle" style="padding-right: 10px; color: #1EA88C;"></i>Visualização</p>  
+                </div>
+        </div>
+
+        <div id="contato" class="area-contato">
+            <div class="area_img_contato">
+                <img src="./img/2448111.png" alt="" style="width: 100%; margin-top: 15%;">
+            </div>
+            <div class="area_form_contato">            
+                <div class="input_contato">
+                    <h3>Contato</h3>
+                    <input type="text" class="input_form" placeholder="Nome">
+                    <input type="text" class="input_form" placeholder="Email">
+                    <textarea name="" id="" cols="30" rows="10" class="text_area" placeholder="Mensagem"></textarea>
+                    <button class="btn_input">Enviar</button>
+                    <h4 style="text-align: center; color: #453b51a1; margin-top: 10px;">Ou</h4>
+                    <div class="icons">
+                        <button style="width: 14%; border-radius: 100%; border: none;"> <img src="./img/facebook.png" alt="" style="width: 100%;"> </button>
+                        <button style="width: 14%; border-radius: 100%; border: none; margin-left: 8%;"> <img src="./img/twitter.png" alt="" style="width: 100%;"> </button>
+                        <button style="width: 14%; border-radius: 100%; border: none; margin-left: 8%;"> <img src="./img/google-plus.png" alt="" style="width: 100%;"> </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="area-footer">
+        <div class="topicos">
+            <h3 class="titulo-footer">FLOW<i class="fas fa-copyright" aria-hidden="true" style="padding-left: 8px;"></i> TODOS OS DIREITOS RESERVADOS</h3>
+            <p class="text-footer">2020</p>
+        </div>
+
+        <div class="topicos">
+            <h3 class="titulo-footer">ENDEREÇO</h3>
+            <p class="text-footer">Haddock lobo - 595 - Cerqueira <br> César - SP</p>
+        </div>
+
+        <div class="topicos">
+            <h3 class="titulo-footer">CONTATO</h3>
+            <a href="https://flow-pi.tomticket.com/chat/geral?id=EP46600" class="text-footer">Acessar Atendimento Online</a>
+        </div>
+
+        <div class="topicos">
+            <h3 class="titulo-footer">REDES SOCIAIS</h3>
+            <div class="area-icons">
+                <img src="./img/facebook (1).png" alt="" class="icon-contato">
+                <img src="./img/instagram.png" alt="" class="icon-contato espacin">
+                <img src="./img/linkedin.png" alt="" class="icon-contato espacin">
+                <img src="./img/twitter (1).png" alt="" class="icon-contato espacin">
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+
+</body>
+</html>
+
+
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script>
+    function flow(){ 
+        var divcor = document.body.querySelector(".cor");
+        divcor.style.display = "block";
+        sumir.style.display = "none";
+        pageSumir.style.display = "none";
+        setTimeout(function(){
+            window.location.href = "./dashboard/login.html";             
+        }, 7500);
+    }
+
+        $('nav a').click(function(e) {
+        e.preventDefault();
+
+        var id = $(this).attr('href'),
+                targetOffset = $(id).offset().top,
+                menuHeight = $('nav').innerHeight();
+        // console.log(e);
+        $('html, body').animate({
+            scrollTop : targetOffset 
+        }, 500);
+    });
+
+    $(window).scroll(() => { 
+        var scroll = $(window).scrollTop();
+    
+        if (scroll > 70) {
+            $('.menu').addClass('menu-auxiliar');
+        } else {
+            $('.menu').removeClass('menu-auxiliar');
+        }
+    });
+    
+</script>

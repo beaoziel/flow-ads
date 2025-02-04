@@ -1,0 +1,43 @@
+body{
+    letter-spacing: 0px;
+    color: #757575;
+    opacity: 1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card-add {
+    width: 75%;
+    height: auto;
+    margin-left: 70px;
+    padding: 30px;
+}
+
+.titulo-edicao{
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.formulario{
+    padding: 20px;
+}
+
+.card-add input {
+    width: 46%;
+}
+
+.container h1 {
+    margin: 35px 0 0 86px;
+}
+
+.logout img {
+    height: 35px;
+    margin: 53px 22px 0 600px;
+}
+
+.btn-editar{
+    margin-right: 1% !important;
+}
+
+.btn-cadastrar{
+    margin-right: -5.2% !important;
+}

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./stylesheets/sidebar.css">
+    <link rel="stylesheet" href="./stylesheets/home.css">
+    <link rel="stylesheet" href="./stylesheets/forms.css">
+    <link rel="stylesheet" href="./stylesheets/globals.css">
+    <script src="funcoes.js"></script>
+    <title>Cadastro de administradores</title>
+
+</head>
+
+<body>
+    <div class="sidebar">
+        <img src="../img/logotipo.png" alt="">
+       
+        <a href="consulta_mercados.html" class="links">
+            <img id="link1" src="../img/dashboard.png">
+            <p>Mercados</p>
+        </a>
+        
+        <a href="cadastro_adm.html" class="links clicked">
+            <img id="link2" src="../img/teamgreen.png">
+            <p>Administradores</p>
+        </a>
+
+        <a href="cadastro_tipo_usuario.html"  class="links">
+            <img id="link3" src="../img/tipous.png">
+            <p>Tipos de usuários</p>
+        </a>
+        
+        <a href="" onclick="consultar_usuario_edita()"  class="links">
+            <img id="link4" src="../img/user.png">
+            <p>Meu perfil</p>
+        </a>
+
+        <a href="visao_geral.html"  class="links">
+            <img id="link5" src="../img/statistics.png">
+            <p>Visão geral</p>
+        </a>
+    </div>
+    </div>
+
+
+    <main>
+        <nav>
+            <div class="container">
+                <h1>Administradores</h1>
+                <div class="logout">
+                    <a href="#" onclick="logoff()"><img src="./img/icons/logout.png" alt="Seta"></a>
+                </div>
+            </div>
+        </nav>
+
+    
+        <div class="cards">
+            <div class="card-add" style="height:350px;">
+                <h4>Cadastro de Administradores</h4>
+                <div id="div_erro" style="height: 30px;"></div>
+                <form id="form_cadastro" method="post" onsubmit="return cadastrar()" autocomplete="off">
+                    <input type="email" placeholder="Email" name="email" class="email" maxlength="35" required>
+
+                    <input type="password" placeholder="Senha" id="senha" name="senha"  maxlength="15" class="senha" required>
+
+                    <input type="password" placeholder="Senha" id="confirma_senha"  maxlength="10" name="password"  required>
+
+                    <button id="btn">Cadastrar</button>
+                </form>
+                <img src="./img/carregamentos/load.gif" id="img_aguarde" style="display: none; height: 70px;">
+            </div>
+           
+
+            <div class="card-consulta">
+                <h4>Administradores</h4>
+                <div class="fundo" id="fundo"></div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
+
+
+<script>
+    consulta();
+
+    function cadastrar() {
+        aguardar();
+        if (senha.value != confirma_senha.value) {
+            event.preventDefault();
+            div_erro.innerHTML = "<p>As senhas estão diferentes!</p>";
+            btn.style.background = "#32CDA7";
+            btn.disabled = true;
+            finalizar_aguardar();
+        } else {
+            var formulario = new URLSearchParams(new FormData(form_cadastro));
+            fetch("/usuarios/cadastrar_adm", {
+                method: "POST",
+                body: formulario
+            }).then(function (response) {
+                if (response.ok) {
+                    alert("Cadastrado com sucesso!");
+                    window.location.href = 'cadastro_adm.html';
+                } else {
+                    div_erro.innerHTML = "<p>Erro no cadastro</p>";
+                }
+                finalizar_aguardar();
+            });
+        }
+        return false;
+    }
+
+
+    function consulta() {
+        fetch("/usuarios/consultar").then(resposta => {
+            if (resposta.ok) {
+                resposta.json().then(json => {
+                    for (let i = 0; i < json.length; i++) {
+                        fundo.innerHTML += `<div class="registros">
+                                                <h2>${json[i].email}</h2>
+                                                    <div class='registros-imgs'>
+                                                        <a href="" onclick='{ return deleta(${json[i].cod_usuario}) }'> <img src="./img/icons/close.png" alt="Excluir"> </a>
+                                                     </div>
+                                                </div>`;
+                    }
+                });
+            } else {
+                container.innerHTML += `Nenhum usuário cadastrado`;
+            }
+        });
+        return false;
+    }
+
+
+    function consultar_usuario(a) {
+        fetch(`/usuarios/consulta/${a}`, { cache: 'no-store' })
+            .then(resposta => {
+                if (resposta.ok) {
+                    window.location.href = "cadastro_adm.html"
+                } else {
+                    alert("Algo deu errado ;(");
+                }
+            });
+    }
+
+    function deleta(a) {
+        var txt;
+        var resposta = confirm("Deseja excluir esse registro?");
+
+        if (resposta == true) {
+            fetch(`/usuarios/deletar/${a}`, { cache: 'no-store' })
+            .then(resposta => {
+                console.log(resposta);
+                if (resposta.ok) {
+                    alert("Administrador excluído!");
+                    location.reload();
+                } else {
+                    alert("Esse usuário não pode ser excluído");
+                }
+            });
+        } 
+
+        return false;
+    }
+
+</script>

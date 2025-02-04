@@ -1,0 +1,185 @@
+<script>
+    history.forward();
+</script>
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mercados Cadastrados</title>
+    <link rel="stylesheet" href="./stylesheets/sidebar.css">
+    <link rel="stylesheet" href="./stylesheets/home.css">
+    <link rel="stylesheet" href="./stylesheets/forms.css">
+    <link rel="stylesheet" href="./stylesheets/consulta-mercado.css">
+    <link rel="stylesheet" href="./stylesheets/globals.css">
+    <!-- scripts do Chart.js -->
+    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+    <script type="text/javascript" src="https://www.chartjs.org/samples/latest/utils.js"></script>
+    <script type="text/javascript" src="./pesquisa_aproximada.js"></script>
+    <script src="funcoes.js"></script>
+
+
+</head>
+
+<body onload="consulta()">
+    <div class="sidebar">
+        <img src="../img/logotipo.png" alt="">
+
+        <a href="consulta_mercados.html" 
+            class="links clicked">
+            <img id="link1" src="../img/dashboardgrenn.png">
+            <p>Mercados</p>
+        </a>
+
+        <a href="cadastro_adm.html"  class="links">
+            <img id="link2" src="../img/team.png">
+            <p>Administradores</p>
+        </a>
+
+        <a href="cadastro_tipo_usuario.html" 
+            class="links">
+            <img id="link3" src="../img/tipous.png">
+            <p>Tipos de usuários</p>
+        </a>
+
+        <a href="" onclick="consultar_usuario_edita()"  class="links">
+            <img id="link4" src="../img/user.png">
+            <p>Meu perfil</p>
+        </a>
+
+        <a href="visao_geral.html"  class="links">
+            <img id="link5" src="../img/statistics.png">
+            <p>Visão geral</p>
+        </a>
+    </div>
+    <main>
+        <nav>
+            <div class="container">
+                <h1>Mercados cadastrados</h1>
+                <div class="logout">
+                    <a href="#" onclick="logoff()"><img src="./img/icons/logout.png" alt="Seta"></a>
+                </div>
+            </div>
+            <div class="input_pesquisa">
+                <input type="text" placeholder="Pesquisar mercado" id="pesquisa" onkeyup="pesquisar()"
+                    class="input-pesquisa-mercado">
+                <a href="cadastro_mercado.html" class="a-cad-mercado">Cadastrar mercado</a>
+            </div>
+        </nav>
+        <img src="./img/carregamentos/load.gif" id="img_aguarde" style="display: none; height: 70px;">
+        <div class="cards" id="cards">
+
+        </div>
+    </main>
+</body>
+
+</html>
+
+<script>
+    history.forward();
+
+    //let idMercado = 0;
+
+    function consulta() {
+        fetch("/mercados/consultar").then(resposta => {
+            if (resposta.ok) {
+                resposta.json().then(json => {
+                    for (let i = 0; i < json.length; i++) {
+
+                        cards.innerHTML += `    <div class="card-add" id='card-add'>
+                                                <h2><p>${json[i].nome}</p></h2>
+                                                <ul>
+                                                <h3>Cnpj</h3>
+                                                <span>${json[i].cnpj}</span>
+                                               
+                                                <h3>Cep</h3>
+                                                <span>${json[i].cep}</span>
+                                               
+                                                <h3>Bairro</h3>
+                                                <span>${json[i].bairro}</span>
+                                               
+                                                <h3>Logradouro</h3>
+                                                <span>${json[i].logradouro}</span>
+                                            
+                                                <h3>Número</h3>
+                                                <span>${json[i].num_estabelecimento}</span>
+
+                                                <div class='registros-imgs'>
+                                                    <a href='' onclick='{ consultar_mercado(${json[i].cod_mercado}) }'><img src="./img/icons/notepad.png" alt="Editar"></a>
+                                                    <a href='' onclick='{ return deleta(${json[i].cod_mercado}) }'><img src="./img/icons/close.png" alt="Excluir"></a>
+                                                    <div class="tooltip">
+                                                        <span class="tooltiptext">Sensores</span>
+                                                        <a href='#' onclick='{ consultar_sensores(${json[i].cod_mercado}) }'><img src="./img/icons/sensor.png" alt="Sensores"></a>
+                                                    </div>
+                                                </div>
+                                                </ul>
+
+                                                <ul id='ul_esp'>
+                                                <h3>Cidade</h3>
+                                                <span>${json[i].cidade}</span>
+                                               
+                                                <h3>Representante</h3>
+                                                <span>${json[i].nome_representante}</span>
+                                               
+                                                <h3>Telefone</h3>
+                                                <span>${json[i].num_telefone}</span>
+                                               
+                                                <h3>Id de acesso</h3>
+                                                <span>${json[i].id_acesso}</span>
+                                               </ul>
+                                               
+                                              `;
+                    }
+                });
+            } else {
+                container.innerHTML += `Nenhum mercado cadastrado`;
+                finalizar_aguardar();
+            }
+        });
+        return false;
+    }
+
+    function consultar_sensores(a) {
+        fetch(`/sensores/consulta/${a}`, { cache: 'no-store' })
+            .then(resposta => {
+                if (resposta.ok) {
+                    window.location.href = "cadastro_sensor.html"
+                } else {
+                    alert("Algo deu errado ;(");
+                }
+            });
+    }
+
+    function consultar_mercado(a) {
+        fetch(`/mercados/consulta/${a}`, { cache: 'no-store' })
+            .then(resposta => {
+                if (resposta.ok) {
+                    window.location.href = "edicao_mercado.html"
+                } else {
+                    alert("Algo deu errado ;(");
+                }
+            });
+    }
+
+    function deleta(idMercado_d) {
+        var txt;
+        var resposta = confirm("Deseja excluir esse registro?");
+        if (resposta == true) {
+            fetch(`/mercados/deletar/${idMercado_d}`, { cache: 'no-store' })
+                .then(resposta => {
+                    if (resposta.ok) {
+                        alert("Mercado excluído! ");
+                        location.reload();
+                    } else {
+                        alert("Esse mercado não pode ser excluído! ");
+                    }
+                });
+        } else {
+            console.log("Cancelado!");
+        }
+        return false;
+    }
+
+</script>

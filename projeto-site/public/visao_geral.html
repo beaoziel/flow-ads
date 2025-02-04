@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Visão geral</title>
+    <link rel="stylesheet" href="./stylesheets/sidebar.css">
+    <link rel="stylesheet" href="./stylesheets/home.css">
+    <link rel="stylesheet" href="./stylesheets/globals.css">
+    <link rel="stylesheet" href="./stylesheets/forms.css">
+
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="funcoes.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+</head>
+
+<body onload="consulta()">
+    <div class="sidebar">
+        <img src="../img/logotipo.png" alt="">
+
+        <a href="consulta_mercados.html" class="links">
+            <img id="link1" src="../img/dashboard.png">
+            <p>Mercados</p>
+        </a>
+
+        <a href="cadastro_adm.html" class="links">
+            <img id="link2" src="../img/team.png">
+            <p>Administradores</p>
+        </a>
+
+        <a href="cadastro_tipo_usuario.html" class="links">
+            <img id="link3" src="../img/tipous.png">
+            <p>Tipos de usuários</p>
+        </a>
+
+        <a href="" onclick="consultar_usuario_edita()" class="links">
+            <img id="link4" src="../img/user.png">
+            <p>Meu perfil</p>
+        </a>
+
+        <a href="visao_geral.html" class="links clicked">
+            <img id="link5" src="../img/statisticsgreen.png">
+            <p>Visão geral</p>
+        </a>
+    </div>
+    <main>
+        <nav>
+            <div class="container">
+                <h1>Visão geral</h1>
+                <div class="logout">
+                    <a href="#" onclick="logoff()"><img src="./img/icons/logout.png" alt="Seta"></a>
+                </div>
+            </div>
+        </nav>
+        <div class="card-all">
+            <div class="card-geral">
+                <img src="./img/cart.png" alt="Sensor">
+                <h3> <span id="span_mercados"></span> Mercados cadastrados</h3>
+            </div>
+
+            <div class="card-geral">
+                <img src="./img/sensor.png" alt="Sensor">
+                <h3> <span id="span_sensores"></span>Sensores cadastrados</h3>
+            </div>
+
+            <div class="card-geral">
+                <img src="./img/woman.png" alt="Sensor">
+                <h3> <span id="span_clientes"></span>Clientes cadastrados</h3>
+            </div>
+
+
+            <div class="card-geral">
+                <img src="./img/adm.png" alt="Sensor">
+                <h3> <span id="span_adms"></span>Administradores cadastrados</h3>
+            </div>
+        </div>
+
+    </main>
+</body>
+
+</html>
+
+<script>
+    function consulta() {
+        fetch("/visaogeral/consultar").then(resposta => {
+            if (resposta.ok) {
+                resposta.json().then(json => {
+                    span_mercados.innerHTML = `${json[0].mercados}`;
+                    span_sensores.innerHTML = `${json[0].sensores}`;
+                    span_clientes.innerHTML = `${json[0].clientes}`;
+                    span_adms.innerHTML = `${json[0].adms}`;
+                });
+            } else {
+                alert("Houve algum problema ;(");
+            }
+        });
+        return false;
+    }
+</script>

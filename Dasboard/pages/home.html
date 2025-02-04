@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link da fonte -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <!----------------------------------------------->
+    <!-- link css -->
+    <link rel="stylesheet" href="../css/home/home.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <!----------------------------------------------->
+    <title>Home</title>
+</head>
+<body>
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="sidebar">
+        <img src="../img/logotipo.png" alt="">
+       
+        <a href="#" onmouseover="setColorIcon(1)" onmouseout="removeColorIcon(1)" class="links clicked">
+            <img id="link1" src="../img/dashboardgrenn.png">
+            <p>Dashboard</p>
+        </a>
+        
+        <a href="#" onmouseover="setColorIcon(2)" onmouseout="removeColorIcon(2)" class="links">
+            <img id="link2" src="../img/team.png">
+            <p>Usuario</p>
+        </a>
+
+        <a href="#" onmouseover="setColorIcon(3)" onmouseout="removeColorIcon(3)" class="links">
+            <img id="link3" src="../img/calendar.png">
+            <p>Calendario</p>
+        </a>
+
+        <a href="#" onmouseover="setColorIcon(4)" onmouseout="removeColorIcon(4)" class="links">
+            <img id="link4" src="../img/statistics.png">
+            <p>Relatorio</p>
+        </a>
+
+        <a href="#" onmouseover="setColorIcon(5)" onmouseout="removeColorIcon(5)" class="links">
+            <img id="link5" src="../img/settings.png">
+            <p>Configurações</p>
+        </a>
+    </div>
+    <main>
+        <nav>
+            <div class="container">
+                <select name="" id="">
+                    <option value="">Selecione o sensor</option>
+                </select>
+                <p>Fernado Laurito</p>
+            </div>
+        </nav>
+        <div class="cards">
+            <div class="container">
+                <div class="card"></div>
+
+                <div class="card"></div>
+
+                <div class="card"></div>
+
+                <div class="card"></div>
+            </div>
+        </div>
+        <div class="graphs">
+            <div class="container">
+                <div class="graph large">
+                    <canvas id="grafico1" style="width: 100%;
+                    height: 100%;"></canvas>
+                </div>
+
+                <div class="graph">
+                    <canvas id="grafico3" style="width: 100%; height:100%">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="graphs">
+            <div class="container">
+                <div class="graph large">
+                    <canvas id="grafico2" style="width: 100%;
+                    height: 100%;"></canvas>
+                </div>
+
+                <div class="graph">
+                    <canvas id="grafico4" style="width: 100%; height:100%">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
+    </main>
+</body>
+<!-- Links dos scripts dos graficos -->
+<script src="path/to/chartjs/dist/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+<script src="../js/grafico1.js"></script>
+<script src="../js/grafico2.js"></script>
+<script src="../js/grafico3.js"></script>
+<script src="../js/grafico4.js"></script>
+<script>
+    function setColorIcon(position) {
+        switch(position) {
+            case 1 :
+                link1.src = '../img/dashboardgrenn.png';
+                break;
+            case 2 : 
+                link2.src = '../img/teamgreen.png';
+                break;
+            case 3 : 
+                link3.src = '../img/calendargreen.png' 
+                break;
+            case 4 : 
+                link4.src = '../img/statisticsgreen.png';
+                break;
+            case 5 : 
+                link5.src = '../img/settingsgreen.png';
+        }
+    }
+
+    function removeColorIcon(position) {
+        switch(position) {
+            case 1 :
+                link1.src = '../img/dashboard.png';
+                break;
+            case 2 : 
+                link2.src = '../img/team.png';
+                break;
+            case 3 : 
+                link3.src = '../img/calendar.png' 
+                break;
+            case 4 : 
+                link4.src = '../img/statistics.png';
+                break;
+            case 5 : 
+                link5.src = '../img/settings.png';
+        }
+    } 
+</script>
+<!----------------------------------------------->
+</html>

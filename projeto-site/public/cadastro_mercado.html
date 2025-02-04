@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./stylesheets/sidebar.css">
+    <link rel="stylesheet" href="./stylesheets/home.css">
+    <link rel="stylesheet" href="./stylesheets/forms.css">
+    <link rel="stylesheet" href="./stylesheets/form-mercado.css">
+
+    <script src="funcoes.js"></script>
+    <title>Cadastro de mercados</title>
+
+</head>
+
+<body>
+    <div class="sidebar">
+        <img src="../img/logotipo.png" alt="">
+       
+        <a href="consulta_mercados.html" class="links clicked">
+            <img id="link1" src="../img/dashboardgrenn.png">
+            <p>Mercados</p>
+        </a>
+        
+        <a href="cadastro_adm.html" class="links">
+            <img id="link2" src="../img/team.png">
+            <p>Administradores</p>
+        </a>
+
+        <a href="cadastro_tipo_usuario.html" class="links">
+            <img id="link3" src="../img/tipous.png">
+            <p>Tipos de usuários</p>
+        </a>
+        
+        <a href="" onclick="consultar_usuario_edita()" class="links">
+            <img id="link4" src="../img/user.png">
+            <p>Meu perfil</p>
+        </a>
+
+        <a href="visao_geral.html"  class="links">
+            <img id="link5" src="../img/statistics.png">
+            <p>Visão geral</p>
+        </a>
+    </div>
+    </div>
+
+
+    <main>
+        <nav>
+            <div class="container">
+                <h1>Mercados</h1>
+                <div class="logout">
+                    <a href="#" onclick="logoff()"><img src="./img/icons/logout.png" alt="Seta"></a>
+                </div>
+                <p id="b_usuario" onclick="logoff()"></p>
+            </div>
+        </nav>
+
+        <div class="cards">
+            <div class="card-add">
+                <h4 class="titulo-edicao">Cadastro de mercados</h4>
+                <form id="form_cadastro" method="post" onsubmit="return cadastrar()" autocomplete="off" class="formulario">
+                    <input type="text" id="nome" name="nome" placeholder="Nome"  maxlength="35" required>
+                    <input type="text" id="cnpj" name="cnpj" placeholder="CNPJ"  maxlength="18" required>
+                    <input type="text" id="cep" name="cep" placeholder="CEP"  maxlength="10" required>
+                    <input type="text" id="logradouro" name="logradouro" placeholder="Logradouro" maxlength="35" required>
+                    <input type="text" id="bairro" name="bairro" placeholder="Bairro"  maxlength="25" required>
+                    <input type="text" id="num_estabelecimento" name="num_estabelecimento" placeholder="Num. Estabelecimento" maxlength="10" required>
+                    <input type="text" id="cidade" name="cidade" placeholder="Cidade"  maxlength="25" required>
+                    <input type="text" id="estado" name="estado" placeholder="Estado"  maxlength="20" required>
+                    <input type="text" id="nome_representante" name="nome_representante" placeholder="Nome representante"  maxlength="30" required>
+                    <input type="text" id="num_telefone" name="num_telefone" placeholder="Num. telefone"  maxlength="14" required>
+                    <br>
+                    <div class="btn-cadastrar">
+                        <button id="btn">Cadastrar</button>
+                    </div>
+                </form>
+                <img src="./img/carregamentos/load.gif" id="img_aguarde" style="display: none; height: 70px;">
+            </div>
+        </div>
+
+
+        <div id="div_erro" style="background-color:aquamarine; color: black; display: none;">
+            Erro no cadastro
+        </div>
+
+</body>
+
+</html>
+<script>
+
+    function cadastrar() {
+        aguardar();
+        var formulario = new URLSearchParams(new FormData(form_cadastro));
+        fetch("/mercados/cadastrar", {
+            method: "POST",
+            body: formulario
+        }).then(function (response) {
+
+            if (response.ok) {
+                alert("Cadastrado com sucesso!");
+                window.location.href = 'consulta_mercados.html';
+            } else {
+                console.log('Erro de cadastro!');
+                response.text().then(function (resposta) {
+                    div_erro.innerHTML = resposta;
+                });
+                finalizar_aguardar();
+            }
+        });
+
+        return false;
+    }
+
+</script>

@@ -1,0 +1,120 @@
+<script>
+    history.forward();
+</script>
+<html> 
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./stylesheets/sidebar.css">
+    <link rel="stylesheet" href="./stylesheets/home.css">
+    <link rel="stylesheet" href="./stylesheets/forms.css">
+    <link rel="stylesheet" href="./stylesheets/globals.css">
+
+    <script src="funcoes.js"></script>
+    <title>Edição tipos de usuários</title>
+
+</head>
+
+<body>
+    <div class="sidebar">
+        <img src="../img/logotipo.png" alt="">
+
+        <a href="consulta_mercados.html"  class="links">
+            <img id="link1" src="../img/dashboard.png">
+            <p>Mercados</p>
+        </a>
+        
+        <a href="cadastro_adm.html" class="links">
+            <img id="link2" src="../img/team.png">
+            <p>Administradores</p>
+        </a>
+
+        <a href="cadastro_tipo_usuario.html" class="links clicked">
+            <img id="link3" src="../img/tipogreen.png">
+            <p>Tipos de usuários</p>
+        </a>
+        
+        <a href="" onclick="consultar_usuario_edita()" class="links">
+            <img id="link4" src="../img/user.png">
+            <p>Meu perfil</p>
+        </a>
+
+        <a href="visao_geral.html"  class="links">
+            <img id="link5" src="../img/statistics.png">
+            <p>Visão geral</p>
+        </a>
+    </div>
+
+
+    <main>
+        <nav>
+            <div class="container">
+                <h1>Tipos de usuários</h1>
+                <div class="back-link">
+                    <img src="./img/icons/arrow.png" alt="Seta">
+                    <a href="cadastro_tipo_usuario.html">Voltar a tela anterior</a>
+                </div>
+                <p id="b_usuario" onclick="logoff()"></p>
+            </div>
+        </nav>
+
+        <div class="cards">
+            <div class="card-add" style="height: 200px;">
+                <h4>Edição de Tipos de usuários</h4>
+                <form id="form_cadastro" method="post" onsubmit="return editar()" autocomplete="off">
+                    <input type="text" id="edita_desc" name="edita_desc" placeholder="Descrição" minlength="4"
+                        maxlength="14" required>
+                    <br>
+                    <button id="btn">Editar</button>
+                </form>
+                <img src="./img/carregamentos/load.gif" id="img_aguarde" style="display: none; height: 70px;">
+            </div>
+        </div>
+    </main>
+
+    <div id="div_erro" style="background-color:aquamarine; color: black; display: none;">
+        Erro na edição
+    </div>
+
+</body>
+
+</html>
+<script>
+    consultar_tipo_usuario();
+
+
+    function editar() {
+        aguardar();
+        var formulario = new URLSearchParams(new FormData(form_cadastro));
+        fetch("/tipousuarios/edita", {
+            method: "POST",
+            body: formulario
+        }).then(function (response) {
+
+            if (response.ok) {
+                window.location.href = 'cadastro_tipo_usuario.html';
+                alert("Tipo de usuário editado!");
+            } else {
+                alert("Erro de edição!");
+                finalizar_aguardar();
+            }
+        });
+
+        return false;
+    }
+
+    function consultar_tipo_usuario() {
+        fetch(`/tipousuarios/edicao`, { cache: 'no-store' })
+            .then(resposta => {
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        document.getElementById("edita_desc").value = `${json[0].descricao}`
+                    })
+                } else {
+                    alert("Algo deu errado ;(");
+                }
+            });
+    }
+
+</script>

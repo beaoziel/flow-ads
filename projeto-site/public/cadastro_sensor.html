@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSS -->
+    <link rel="stylesheet" href="./stylesheets/sidebar.css">
+    <link rel="stylesheet" href="./stylesheets/home.css">
+    <link rel="stylesheet" href="./stylesheets/forms.css">
+    <link rel="stylesheet" href="./stylesheets/globals.css">
+
+    <script src="funcoes.js"></script>
+    <title>Cadastro de sensores</title>
+
+</head>
+
+<body>
+    <div class="sidebar">
+        <img src="../img/logotipo.png" alt="">
+       
+        <a href="consulta_mercados.html" class="links clicked">
+            <img id="link1" src="../img/dashboardgrenn.png">
+            <p>Mercados</p>
+        </a>
+        
+        <a href="cadastro_adm.html" class="links">
+            <img id="link2" src="../img/team.png">
+            <p>Administradores</p>
+        </a>
+
+        <a href="cadastro_tipo_usuario.html" class="links">
+            <img id="link3" src="../img/tipous.png">
+            <p>Tipos de usuários</p>
+        </a>
+
+        <a href="" onclick="consultar_usuario_edita()" class="links">
+            <img id="link4" src="../img/user.png">
+            <p>Meu perfil</p>
+        </a>
+
+        <a href="visao_geral.html"  class="links">
+            <img id="link5" src="../img/statistics.png">
+            <p>Visão geral</p>
+        </a>
+    </div>
+    </div>
+    
+
+    <main>
+        <nav>
+            <div class="container">
+                <h1>Sensores</h1>
+                <div class="logout">
+                    <a href="#" onclick="logoff()"><img src="./img/icons/logout.png" alt="Seta"></a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="cards">
+            <div class="card-add">
+                <h4>Cadastro de Sensor</h4>
+                    <form id="form_cadastro" method="post" onsubmit="return cadastrar()" autocomplete="off">
+                        <input type="text" id="desc" name="desc" placeholder="Descrição" minlength="1" maxlength="20" required>
+                        <br>
+                        <input type="text" id="desc" name="eixo_x" placeholder="Eixo X" minlength="1" maxlength="4" required>
+                        <br>
+                        <input type="text" id="desc" name="eixo_y" placeholder="Eixo Y" minlength="1" maxlength="4" required>
+                        <br>
+                        <input type="text" id="desc" name="raio" placeholder="Raio" minlength="1" maxlength="4" required>
+
+                        <button id="btn">Cadastrar</button>
+                    </form>
+                    <img src="./img/carregamentos/load.gif" id="img_aguarde" style="display: none; height: 70px;">
+            </div>
+        
+
+        <div class="card-consulta">
+            <h4>Sensores - <span id="span_nome"></span></h4>
+            <div class="fundo" id="fundo"></div>
+        </div>
+    </div>
+
+        <div id="div_erro" style="background-color:aquamarine; color: black; display: none;">
+            Erro no cadastro
+        </div>
+    </main>
+
+</body>
+
+</html>
+<script>
+    consulta();
+
+    function cadastrar() {
+        aguardar();
+        var formulario = new URLSearchParams(new FormData(form_cadastro));
+        fetch("/sensores/cadastrar", {
+            method: "POST",
+            body: formulario
+        }).then(function (response) {
+
+            if (response.ok) {
+                alert(" Sensor cadastrado!");
+                window.location.href = 'cadastro_sensor.html';
+            } else {
+                alert("Erro de cadastro")
+                finalizar_aguardar();
+            }
+        });
+
+        return false;
+    }
+
+
+    function consulta() {
+        fetch("/sensores/consultar").then(resposta => {
+            if (resposta.ok) {
+                resposta.json().then(json => {
+                    for (let i = 0; i < json.length; i++) {
+                        span_nome.innerHTML = `${json[i].nome}`;
+
+                        fundo.innerHTML += `<div class="registros">
+                                                <h2>${json[i].descricao}</h2>
+                                                    <div class='registros-imgs'>
+                                                        <a href='' onclick='{ consultar_sensor(${json[i].cod_sensor}) }'><img src="./img/icons/notepad.png" alt="Editar"></a>
+                                                        <a href='' onclick='{ return deleta(${json[i].cod_sensor}) }'><img src="./img/icons/close.png" alt="Excluir"></a>
+                                                    </div>
+                                                </div>`;
+                    }
+                });
+            } else {
+                        fundo.innerHTML += `Nenhum sensor cadastrado`;
+            }
+        });
+        return false;
+    }
+
+    
+    function consultar_sensor(a) {
+        fetch(`/sensores/consulta/${a}`, { cache: 'no-store' })
+            .then(resposta => {
+                if (resposta.ok) {
+                    window.location.href = "edicao_sensor.html"
+                } else {
+                    alert("Algo deu errado ;(");
+                }
+            });
+    }
+
+    function deleta(a) {
+        var txt;
+        var resposta = confirm("Deseja excluir esse registro?");
+
+        if (resposta == true) {
+            fetch(`/sensores/deletar/${a}`)
+            .then(resposta => {
+                if (resposta.ok) {
+                    alert("Sensor excluido!");
+                    location.reload()
+                } else {
+                    alert("Esse sensor não pode ser excluído");
+                }
+            });
+        }else{
+            console.log("Cancelado!");
+        }
+
+        return false;
+    }
+</script>

@@ -1,0 +1,129 @@
+<script>
+    history.forward();
+</script>
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSS -->
+    <link rel="stylesheet" href="./stylesheets/sidebar.css">
+    <link rel="stylesheet" href="./stylesheets/home.css">
+    <link rel="stylesheet" href="./stylesheets/forms.css">
+    <link rel="stylesheet" href="./stylesheets/globals.css">
+
+    <script src="funcoes.js"></script>
+    <title>Edição de sensores</title>
+
+</head>
+
+<body>
+    <div class="sidebar">
+        <img src="../img/logotipo.png" alt="">
+
+        <a href="consulta_mercados.html" class="links clicked">
+            <img id="link1" src="../img/dashboardgrenn.png">
+            <p>Mercados</p>
+        </a>
+        
+        <a href="cadastro_adm.html" class="links">
+            <img id="link2" src="../img/team.png">
+            <p>Administradores</p>
+        </a>
+
+        <a href="cadastro_tipo_usuario.html" class="links">
+            <img id="link3" src="../img/tipous.png">
+            <p>Tipos de usuários</p>
+        </a>
+        
+        <a href="" onclick="consultar_usuario_edita()" class="links">
+            <img id="link4" src="../img/user.png">
+            <p>Meu perfil</p>
+        </a>
+
+        <a href="visao_geral.html"  class="links">
+            <img id="link5" src="../img/statistics.png">
+            <p>Visão geral</p>
+        </a>
+    </div>
+    
+
+    <main>
+        <nav>
+            <div class="container">
+                <h1>Sensores</h1>
+                <div class="back-link">
+                    <img src="./img/icons/arrow.png" alt="Seta">
+                    <a href="consulta_mercados.html">Voltar a tela anterior</a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="cards">
+            <div class="card-add">
+                <h4>Edição de Sensor</h4>
+                    <form id="form_cadastro" method="post" onsubmit="return editar()" autocomplete="off">
+                        <input type="text" id="desc" name="desc" placeholder="Descrição" minlength="1" maxlength="20" required>
+                        <br>
+                        <input type="text" id="eixo_x" name="eixo_x" placeholder="Eixo X" minlength="1" maxlength="5" required>
+                        <br>
+                        <input type="text" id="eixo_y" name="eixo_y" placeholder="Eixo Y" minlength="1" maxlength="5" required>
+                        <br>
+                        <input type="text" id="raio" name="raio" placeholder="Raio" minlength="1" maxlength="5" required>
+
+                        <button id="btn">Editar</button>
+                    </form>
+                    <img src="./img/carregamentos/load.gif" id="img_aguarde" style="display: none; height: 70px;">
+            </div>
+    </div>
+
+        <div id="div_erro" style="background-color:aquamarine; color: black; display: none;">
+            Erro na edição
+        </div>
+    </main>
+
+</body>
+
+</html>
+
+<script>
+    consultar_sensor();
+
+    function editar() {
+        aguardar();
+        var formulario = new URLSearchParams(new FormData(form_cadastro));
+        fetch("/sensores/edita", {
+            method: "POST",
+            body: formulario
+        }).then(function (response) {
+
+            if (response.ok) {
+                alert("Sensor editado!");
+                window.location.href = 'consulta_mercados.html';
+            } else {
+                alert("Erro de edição!");
+                finalizar_aguardar();
+            }
+        });
+        return false;
+    }
+
+
+    function consultar_sensor() {
+        fetch(`/sensores/edicao`, { cache: 'no-store' })
+            .then(resposta => {
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        document.getElementById("desc").value = `${json[0].descricao}`;
+                        document.getElementById("eixo_x").value = `${json[0].eixo_x}`;
+                        document.getElementById("eixo_y").value = `${json[0].eixo_y}`;
+                        document.getElementById("raio").value = `${json[0].raio}`;
+                    })
+                } else {
+                    alert("Algo deu errado ;(");
+                }
+            });
+    }
+</script>

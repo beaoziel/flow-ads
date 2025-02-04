@@ -1,0 +1,74 @@
+
+body{
+    overflow-x: hidden;
+}
+
+.back-link {
+    float: right;
+    margin: 45px 0 0 426px;
+}
+
+.back-link:hover{
+    filter: brightness(85%);
+}
+
+.back-link a {
+    font-size: 18px;
+    text-decoration: none;
+    color: rgb(121, 117, 117);
+    margin: -13px 0 0 5px;
+}
+
+
+.back-link img {
+    height: 29px;
+    float: left;
+    padding: 0 0 0 80px;
+}
+
+
+.logout img {
+    height: 35px;
+    float: right;
+    margin: 52px 22px 0 0;
+}
+
+.logout:hover{
+    filter: brightness(85%);
+}
+
+.card-all {
+    margin: 40px 0 0 180px;
+    width: 100%;
+    height: auto;
+}
+
+.card-geral {
+    width: 28%;
+    height: 210px;
+    background-color: #FFF;
+    box-shadow: 2px 3px 10px #0000001A;
+    border-radius: 10px;
+    margin: 20px 10px 0 20px;
+    display: inline-block;
+    padding: 20px;
+    text-align: center;
+}
+
+.card-geral img{
+    height: 30%;
+    margin: auto;
+    margin: 25px  0 30px 0;
+}
+
+.card-geral span{
+    display: block;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.card-geral h3{
+    font-weight: 400;
+}
+
+

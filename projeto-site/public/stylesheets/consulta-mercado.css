@@ -1,0 +1,135 @@
+body{
+    overflow-x: hidden;
+}
+
+.cards {
+    display: inline-block;
+    width: 100%;
+    padding: 95px 0 0 40px;
+}
+
+.card-add {
+    width: 40%;
+    height: auto;
+    background-color: #FFF;
+    box-shadow: 2px 3px 10px #0000001A;
+    border-radius: 25px;
+    margin: 0px 0 16px 25px;
+    float: left;
+    padding: 40px 0px 0 50px;
+}
+
+ul {
+    float: left;
+    margin: 10px 0 0 0;
+}
+
+.registros-imgs {
+    width: 100%;
+    padding-top: 20px;
+}
+
+.registros-imgs img{
+    height: 40px;
+    margin:0 0 40px 10px;
+    padding: 5px;
+}
+
+.input_pesquisa {
+    width: 90%;
+    border-bottom-width: 3px;
+    padding: 15px;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 3.5%;
+    margin-top: 5px;
+}
+
+.input-pesquisa-mercado {
+    width: 24%;
+    height: 50px !important;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.158);
+    font-size: 16px;
+    border: none;
+    margin: 5px 0 0 27px;
+}
+
+.a-cad-mercado {
+    text-decoration: none;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.527);
+    list-style: none;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+.a-cad-mercado a{
+  float: right;
+  margin: 0 0 0 30px;
+}
+
+.a-cad-mercado:hover{
+    color: #1EA88C;
+}
+
+.input-pesquisa-mercado:hover{
+    border-left: solid 3px #1EA88C;
+}
+
+h3{
+    font-weight: 500;
+    padding-top: 15px;
+}
+
+span{
+    margin-bottom: 2px;
+    letter-spacing: 1px;
+}
+
+p{
+    margin-bottom: 10px;
+    color: #1EA88C;
+    font-size: 30px;
+}
+
+#ul_esp{
+    float: right;
+    padding-right: 80px;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    height: 10px;
+}
+
+.tooltip span{
+    font-size: 12px;
+    margin: 0;
+}
+
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 70px;
+    background: rgb(248, 248, 248);
+    bottom: 100%;
+    left: 50%;
+    margin-left: -30px;
+    color:  black;
+    text-align: center;
+    padding: 2px 0;
+    border-radius: 6px;
+   
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+  }
+  
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}

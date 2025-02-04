@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link da fonte -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <!----------------------------------------------->
+    <!-- link css -->
+    <link rel="stylesheet" href="../css/home/style.css">
+    <!----------------------------------------------->
+    <title>Home</title>
+</head>
+<body>
+
+    <!-- Menu Lateral -->
+    <div class="menuLateral">
+        <img src="../img/ideia01.png" alt="" class="logo">
+        <!-- Primeiros lins/botoes -->
+        <label for="">Dashboard</label>
+        <ul>
+            <li><a class="link" href="#"><object type="image/svg+xml" data="../img/icons/home-run.svg"></object>Home </a></li>
+
+            <li>
+                <a class="link-02" href="#">
+                    <object class="icon" type="image/svg+xml" data="../img/icons/user.svg"></object> Usuário
+                </a>
+            </li>
+
+            <li>
+                <a class="link-03" href="#">
+                    <object type="image/svg+xml" data="../img/icons/graphs.svg"></object>Relatório
+                </a>
+            </li>
+
+            <li>
+                <a class="link-04" href="#">
+                    <object type="image/svg+xml" data="../img/icons/calendario.svg"></object>Calendário
+                </a>
+            </li>
+
+            <li>
+                <a class="link-05" href="#">
+                    <object type="image/svg+xml" data="../img/icons/configuracoes.svg"></object>Configuração
+                </a>
+            </li>
+            
+            
+
+        </ul>
+    </div>
+    <!-- Menu de Navegação -->
+
+    <!-- Nav-->
+    <nav>
+        <select name="" id="select_setor">
+            <option disabled selected>Selecione o setor</option>
+            <option value="">Entrada A</option>
+            <option value="">Saída A</option>
+            <option value="">Pátio A</option>
+        </select>
+
+        <!-- Conteúdo da esquerda do nav-->
+       <a href=""><img src="../img/icons_nav/alerts.png" alt=""></a>
+       <a href=""><img src="../img/icons_nav/messages.png" alt=""></a>
+
+       <!-- Conteúdo da direita do nav-->
+        <img src="../img/icons_nav/profile.png" id="img_profile">
+        <a href=""><img src="../img/icons_nav/fig.png" id="fig_img"></a>
+        <p>Fernando Laurito</p>
+        <a href=""><img src="../img/icons_nav/logout.png" id="logout_img"></a>
+        <p>Logout</p>
+    </nav>
+    <!-- Nav -->
+
+    <!-- Conteudo da Pagina -->
+    <div class="container">
+        <!-- Cards -->
+        
+        <div class="cards">
+        
+        <!-- Fluxo dia -->
+          <div class="card">
+                <img src="../img/icon_c1.png" alt="">
+                <p>Fluxo do dia</p>
+                <h3>1.530</h3>
+                <p class="p_desc"><span class="ideal">⬆️ 11.28%</span> a mais que o dia anterior</p>
+          </div>
+    
+        <!-- Fluxo semanal -->
+            <div class="card ">
+                <img src="../img/icon_c2.png" alt="">
+                <p>Fluxo da semana</p>
+                <h3>9.100</h3>
+                <p class="p_desc"><span class="medio">⬇️ 10.28%</span> a menos que a semana anterior</p>
+            </div>
+
+        <!-- Fluxo mensal -->
+            <div class="card">
+                <img src="../img/icon_c3.png" alt="">
+                <p>Fluxo do mês</p>
+                <h3>27.300</h3>
+                <p class="p_desc"><span class="abaixo">⬇️ 20.17%</span> a menos que o mês anterior</p>
+            </div>
+
+        <!-- Melhor mes -->
+            <div class="card">
+                <img src="../img/icon_c4.png" alt="">
+                <p>Melhor mês</p>
+                <h3>Maio</h3>
+                <p class="p_desc"><span class="ideal">⬆️ 11.28%</span> a mais que os meses anteriores</p>
+            </div>
+
+        <!-- Graficos -->
+        <div class="graphs">
+            <!-- Fluxo ao decorrer do dia -->
+            <div class="retan">
+                <canvas id="grafico1" style="width: 100%;
+                height: 100%;"></canvas>
+            </div>
+
+            <!-- Fluxo por dia da semana -->
+            <div class="quad">
+                <canvas id="grafico3" style="width: 100%; height:100%">
+
+                </canvas>
+            </div>
+        </div>
+        
+            <!-- Fluxo do Mes Semana x Semana -->
+            <div class="retan">
+                <canvas id="grafico2" style="width: 100%;
+                height: 100%;"></canvas>
+            </div>
+
+            <!-- Fluxo do ano -->
+            <div class="quad">
+                <canvas id="grafico4" style="width: 100%; height:100%">
+
+                </canvas>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- Links dos scripts dos graficos -->
+<script src="path/to/chartjs/dist/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+<script src="../js/grafico1.js"></script>
+<script src="../js/grafico2.js"></script>
+<script src="../js/grafico3.js"></script>
+<script src="../js/grafico4.js"></script>
+<!----------------------------------------------->
+</html>
